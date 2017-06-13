@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Create Task</title>
+</head>
+<body> <div id="box"></div>
+    <p><a href="http://localhost:8080/ui/logout/"> Выход</a> </p>
+    <h1>Create Task</h1>
+    <p>Your tasklists</p>
+    <table border=1>
+        <tr>
+            <th>Tasklist name</th>
+            <th>Owner</th>
+            <th>tasks</th>
+            <th>Friends</th>
+            <th>Read only friends</th>
+        </tr>
+    {% for i in resp %}
+        <tr>
+            <td><a href="http://localhost:8080/ui/{{i.id}}">{{i.name}}</a></td>
+            <td>{{i.owner}}</td>
+            <td>{{i.tasks}}</td>
+            <td>{{i.friends}}</td>
+            <td>{{i.ro_friends}}</td>
+        </tr>
+
+    {% endfor %}
+    </table>
+    <p>Tasklist, which you can edit</p>
+     <table border=1>
+        <tr>
+            <th>Task name</th>
+            <th>Owner</th>
+            <th>Description</th>
+            <th>Comleted</th>
+            <th>Date created</th>
+            <th>Due date</th>
+            <th>Tags</th>
+            <th>Priority</th>
+        </tr>
+    {% for i in shared %}
+        <tr>
+            <td><a href="http://localhost:8080/ui/{{i.id}}">{{i.name}}</a></td>
+            <td>{{i.owner}}</td>
+            <td>{{i.description}}</td>
+            <td>{{i.completed}}</td>
+            <td>{{i.date_created}}</td>
+            <td>{{i.due_date}}</td>
+            <td>{{i.tags}}</td>
+            <td>{{i.priority}}</td>
+        </tr>
+
+    {% endfor %}
+    </table>
+    <p>Tasklist, which you can view</p>
+     <table border=1>
+        <tr>
+            <th>Task name</th>
+            <th>Owner</th>
+            <th>Description</th>
+            <th>Comleted</th>
+            <th>Date created</th>
+            <th>Due date</th>
+            <th>Tags</th>
+            <th>Priority</th>
+        </tr>
+    {% for i in ro_shared %}
+        <tr>
+            <td>{{i.name}}</td>
+            <td>{{i.owner}}</td>
+            <td>{{i.description}}</td>
+            <td>{{i.completed}}</td>
+            <td>{{i.date_created}}</td>
+            <td>{{i.due_date}}</td>
+            <td>{{i.tags}}</td>
+            <td>{{i.priority}}</td>
+        </tr>
+
+    {% endfor %}
+    </table>
+    <form action="/ui/" method="post">
+        {% csrf_token %}
+        {{form.as_ul}}
+        <input type="submit" value="submit" />
+    </form>
+</body>
+</html>

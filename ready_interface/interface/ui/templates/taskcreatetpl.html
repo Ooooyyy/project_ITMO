@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Create Task</title>
+</head>
+<body> <div id="box"></div>
+    <h1>Create Task</h1>
+    <p><a href="http://localhost:8080/ui/{{list}}">To tasklist</a> </p>
+    <table border=1>
+        <tr>
+            <th>Task name</th>
+            <th>Description</th>
+            <th>Comleted</th>
+            <th>Date created</th>
+            <th>Due date</th>
+            <th>Tags</th>
+            <th>Priority</th>
+        </tr>
+    {% for i in resp %}
+        <tr>
+            <td><a href="http://localhost:8080/ui/{{list}}/tasks/{{i.id}}">{{i.name}}</a></td>
+            <td>{{i.description}}</td>
+            <td>{{i.completed}}</td>
+            <td>{{i.date_created}}</td>
+            <td>{{i.due_date}}</td>
+            <td>{{i.tags}}</td>
+            <td>{{i.priority}}</td>
+        </tr>
+
+    {% endfor %}
+    </table>
+
+    <form action={{action}} method="post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th>Name: </th>
+                <th>{{form.name}}</th>
+            </tr>
+            <tr>
+                <th>Description: </th>
+                <th>{{form.description}}</th>
+            </tr>
+            <tr>
+                <th>Comleted: </th>
+                <th>{{form.completed}}</th>
+            </tr>
+            <tr>
+                <th>Due date: </th>
+                <th>{{form.due_date}}</th>
+            </tr>
+            <tr>
+                <th>Tags: </th>
+                <th>{{form.tags}}</th>
+            </tr>
+            <tr>
+                <th>Priority: </th>
+                <th>{{form.priority}}</th>
+            </tr>
+        </table>
+        <input type="submit" value="submit" />
+    </form>
+</body>
+</html>

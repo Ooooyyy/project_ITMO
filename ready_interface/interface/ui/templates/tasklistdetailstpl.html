@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title> Task List Details</title>
+</head>
+<body>
+    <h1>Task List Details</h1>
+     <p><a href="http://localhost:8080/ui/">To tasklists</a> </p>
+    <table border=1>
+        <tr>
+            <th>Name</th>
+            <th>Owner</th>
+            <th>Tasks</th>
+            <th>Friends</th>
+            <th>Read only friends</th>
+        </tr>
+        <tr>
+            <td>{{list.name}}</td>
+            <td>{{list.owner}}</td>
+            <td>
+                {% for i in list.tasks%}
+                <p>{{i}}</p>
+                {% endfor %}
+            </td>
+            <td>{{list.friends}}</td>
+            <td>{{list.ro_friends}}</td>
+        </tr>
+    </table>
+    <p><a href="http://localhost:8080/ui/{{pk}}/tasks">To tasks</a> </p>
+    <form action="{{action}}" method="post">
+        {% csrf_token %}
+        {{ form.as_ul }}
+        <input type="submit" value="Submit" />
+    </form>
+</body>
+</html>
